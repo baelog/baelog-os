@@ -1,5 +1,8 @@
 # baelog-os
 
+https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf
+was a great help
+
 compilation line :
 
 nasm boot_sect.asm -f bin -o <binary_name>
