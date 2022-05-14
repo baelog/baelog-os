@@ -4,11 +4,11 @@
 
 [org 0x7c00]
 
-mov bx, my_string
-add bx, 0x7c00
+mov bx, hex_prefix
+; add bx, 0x7c00        ; not needed anymore
 
-; call print_string
-call print_hexa
+call print_string
+; call print_hexa
 
 jmp $
 
@@ -16,20 +16,20 @@ jmp $
 
 print_hexa:
     pusha
-    mov ax, 0xf000
+    mov dx, 0xf000
     mov cx, bx
     and bx, ax
     call set_char
     call print_char
 
 loop_hexa:
-    dec dx
-    shr ax, 4
+    shr dx, 4
     mov bx, cx
     and bx, ax
+
     call set_char
     call print_char
-    cmp ax, 0x000f
+    cmp dx, 0x000f
     je end_print_hexa
     jmp loop_hexa
 
