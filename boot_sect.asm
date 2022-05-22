@@ -1,26 +1,31 @@
-;
-; A simple boot sector program that loops forever.
-;
-
+; A boot sector that enters 32 - bit protected mode.
 [org 0x7c00]
 
-    ; mov bx, my_string
-    ; add bx, 0x7c00        ; not needed anymore
-    ; call print_string
+    mov bp, 0x9000 ; Set the stack.
+    mov sp, bp
+    mov bx, MSG_REAL_MODE
 
-    mov dx, 0x1234
-    call print_hex
-
+    call print_string
+    call switch_to_pm ; Note that we never return from here.
     jmp $
 
-%include "./print_string.asm"
-%include "./print_hexa.asm"
+    %include "print_string.asm"
+    %include "global_descriptor_table.asm"
+    %include "print_string_32.asm"
+    %include "from_16_to_32.asm"
 
-my_string:
-    db "Hello World\n", 0
+[bits 32]
 
+; This is where we arrive after switching to and initialising protected mode.
+BEGIN_PM:
+    mov ebx, MSG_PROT_MODE
+    call print_string_pm ; Use our 32 - bit print routine.
+    jmp $ ; Hang.
 
+; Global variables
+MSG_REAL_MODE db "Started in 16 - bit Real Mode", 0
+MSG_PROT_MODE db "Successfully landed in 32 - bit Protected Mode" , 0
 
-; padding and magic number
-times 510-($-$$) db 0
+; Bootsector padding
+times 510 -( $ - $$ ) db 0
 dw 0xaa55
