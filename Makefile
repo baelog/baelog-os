@@ -1,4 +1,4 @@
-NAME = os-image
+NAME = baelog-image
 
 all: $(NAME)
 
