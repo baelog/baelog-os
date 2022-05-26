@@ -1,8 +1,0 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/brassart/os'
-nasm boot_sect.asm -f bin -o boot_sect.bin
-nasm kernel_entry.asm -f elf64 -o kernel_entry.o
-make: Leaving directory '/home/brassart/os'
- 
-make: *** No rule to make target 'kernel.c', needed by 'kernel.o'.
-

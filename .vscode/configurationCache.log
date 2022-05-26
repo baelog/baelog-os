@@ -1,1 +1,0 @@
-{"buildTargets":["all","baelog-image","boot_sect.bin","clean","fclean","kernel.bin","kernel.o","kernel_entry.o","re","run"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
